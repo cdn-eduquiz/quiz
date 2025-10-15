@@ -563,6 +563,9 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
     font-size: 13.5px;
+   user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 
 }
 .close-btn {
@@ -692,7 +695,23 @@ floatingButton.addEventListener("click", () => {
   floatingButton.style.display = "none";
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const popupContent = document.querySelector(".popup-content");
 
+  if (popupContent) {
+    // Chặn chuột phải
+    popupContent.addEventListener("contextmenu", e => e.preventDefault());
+
+    // Chặn chọn text + copy
+    popupContent.addEventListener("selectstart", e => e.preventDefault());
+    popupContent.addEventListener("copy", e => e.preventDefault());
+
+    // Chặn kéo thả / highlight
+    popupContent.addEventListener("dragstart", e => e.preventDefault());
+  }
+});
+</script>
 
 
 
